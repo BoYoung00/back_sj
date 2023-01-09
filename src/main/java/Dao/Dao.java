@@ -77,14 +77,14 @@ public class Dao {
         
         //객체 닫기
         finally { //무조건 한 번 실행 시키기
-            if (rs != null) { //Resultset 값이 없다면
+            if (rs != null) { //Resultset 값이 있다면
                 try {
                     rs.close(); //객체 닫기
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            if (ps != null) { //sql문장이 널값이 아니라면
+            if (ps != null) { //sql문장이 값이 있다면
                 try {
                     ps.close();
                 }catch (Exception e) {
@@ -94,6 +94,93 @@ public class Dao {
             }
         }
         return dto;
+    }
+
+    //삭제
+    public int deletetUser(String id) {
+        int deleteCount = 0;
+
+        Connection conn = null; //데이터베이스 연결(url, user, pw 필요)
+
+        PreparedStatement ps = null; //sql문
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
+            String sql = "delete from sj_tb where id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+
+            deleteCount = ps.executeUpdate(); //삭제 완료되면 1 반환해줌
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //객체 닫기
+        finally { //무조건 한 번 실행 시키기
+            if (conn != null) { //connection 값이 있다면
+                try {
+                    conn.close(); //객체 닫기
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) { //sql문장이 값이 있다면
+                try {
+                    ps.close();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return deleteCount;
+    }
+
+    //수정
+    public int updateUser(Dto dto){
+        int updateCount = 0;
+
+        Connection conn = null; //데이터베이스 연결(url, user, pw 필요)
+        PreparedStatement ps = null; //sql문
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
+
+            String sql = "update sj_tb set pw=? where id=?";
+
+            ps=conn.prepareStatement(sql);
+
+            ps.setString(1, dto.getPw());
+            ps.setString(2, dto.getId());
+
+            updateCount = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //객체 닫기
+        finally { //무조건 한 번 실행 시키기
+            if (conn != null) { //connection 값이 있다면
+                try {
+                    conn.close(); //객체 닫기
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) { //sql문장이 값이 있다면
+                try {
+                    ps.close();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return updateCount;
+
     }
 
 }
