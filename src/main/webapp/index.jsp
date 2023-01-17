@@ -5,9 +5,17 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+
+<form action="" method="post">
+    <input type="text" name="name" id="">
+    <input type="submit" value="확인">
+</form>
+
+<%
+    String name = request.getParameter("name");
+%>
+
+받은 값 : <%=name%>
+
 </body>
 </html>
