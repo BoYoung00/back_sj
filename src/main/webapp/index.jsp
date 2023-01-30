@@ -17,5 +17,13 @@
 
 받은 값 : <%=name%>
 
+<hr>
+
+<form action="loginAction.jsp" method="post">
+    <input type="text" name="userID" id="userID">
+    <input type="text" name="userPW" id="userPW">
+    <input type="submit" value="로그인">
+</form>
+
 </body>
 </html>

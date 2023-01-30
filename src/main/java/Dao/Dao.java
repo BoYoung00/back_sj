@@ -182,5 +182,33 @@ public class Dao {
         return updateCount;
 
     }
+    public int loginUser(Dto dto) {
+
+        String sql = "SELECT pw FROM sj_tb WHERE id=?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); //드라이버 연결
+            Connection conn = DriverManager.getConnection(url, user, password); //DB연결
+            PreparedStatement ps = conn.prepareStatement(sql); //쿼리 연결
+            ps.setString(1, dto.getId());
+
+            ResultSet rs = ps.executeQuery(); //값으로 뭔갈 해야할 때, 결과 값 저장 (객체값 반환함 => 행)
+            if (rs.next()) {
+                if (rs.getString(1).equals(dto.getPw())) { //id pw 일치하는 값 있으면
+                    return 1; //성공
+                }
+                else {
+                    return 0; //하나 일치하지 않음
+                }
+            }
+
+            return  -1; //일치한거 없음
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -2; //DB 오류
+    }
 
 }
