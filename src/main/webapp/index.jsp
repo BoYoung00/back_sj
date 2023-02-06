@@ -25,5 +25,12 @@
     <input type="submit" value="로그인">
 </form>
 
+<hr>
+
+<form action="deleteAction.jsp" method="post">
+    <input type="text" name="userID" id="delID">
+    <input type="submit" value="삭제">
+</form>
+
 </body>
 </html>
