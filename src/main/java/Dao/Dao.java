@@ -48,7 +48,7 @@ public class Dao {
 
     //검색
     public Dto getUser(String id) {
-        //초고화
+        //초기화
         Dto dto = null; //객체 연결
         Connection conn = null; //데이터베이스 연결
 

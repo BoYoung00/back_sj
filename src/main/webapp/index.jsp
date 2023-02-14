@@ -32,5 +32,23 @@
     <input type="submit" value="삭제">
 </form>
 
+<hr>
+
+<form action="abbAction.jsp" method="post">
+    <input type="text" name="userID" id="addID">
+    <input type="text" name="userPW" id="addPW">
+    <input type="submit" value="회원가입">
+</form>
+
+<hr>
+
+<form action="updateAction.jsp" method="post">
+    <input type="text" name="userID">
+    <input type="text" name="userPW">
+    <input type="submit" value="수정하기">
+</form>
+
+
+
 </body>
 </html>
